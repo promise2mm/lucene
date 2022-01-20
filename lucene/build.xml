@@ -131,82 +131,82 @@
     </sequential>
   </target>
 
-  <target name="documentation" description="Generate all documentation"
-    depends="javadocs,changes-to-html,process-webpages"/>
-  <target name="javadoc" depends="javadocs"/>
-  <target name="javadocs" description="Generate javadoc" depends="javadocs-lucene-core, javadocs-modules, javadocs-test-framework"/>
+<!--  <target name="documentation" description="Generate all documentation"-->
+<!--    depends="javadocs,changes-to-html,process-webpages"/>-->
+<!--  <target name="javadoc" depends="javadocs"/>-->
+<!--  <target name="javadocs" description="Generate javadoc" depends="javadocs-lucene-core, javadocs-modules, javadocs-test-framework"/>-->
 
-  <target name="documentation-lint" depends="-ecj-javadoc-lint,-documentation-lint-unsupported" if="documentation-lint.supported"
-          description="Validates the generated documentation (HTML errors, broken links,...)">
-    <!-- we use antcall here, otherwise ANT will run all dependent targets: -->
-    <antcall target="-documentation-lint"/>
-  </target>
+<!--  <target name="documentation-lint" depends="-ecj-javadoc-lint,-documentation-lint-unsupported" if="documentation-lint.supported"-->
+<!--          description="Validates the generated documentation (HTML errors, broken links,...)">-->
+<!--    &lt;!&ndash; we use antcall here, otherwise ANT will run all dependent targets: &ndash;&gt;-->
+<!--    <antcall target="-documentation-lint"/>-->
+<!--  </target>-->
 
   <!-- we check for broken links across all documentation -->
-  <target name="-documentation-lint" depends="documentation">
-    <echo message="checking for broken html..."/>
-    <jtidy-macro>
-       <!-- NOTE: must currently exclude deprecated-list due to a javadocs bug (as of 1.7.0_09)
-            javadocs generates invalid XML if you deprecate a method that takes a parameter
-            with a generic type -->
-      <fileset dir="build/docs" includes="**/*.html" excludes="**/deprecated-list.html"/>
-    </jtidy-macro>
-    <echo message="Checking for broken links..."/>
-    <check-broken-links dir="build/docs"/>
-    <echo message="Checking for missing docs..."/>
-    <!-- TODO: change this level=method -->
-    <check-missing-javadocs dir="build/docs" level="class"/>
-    <!-- too many classes to fix overall to just enable
-         the above to be level="method" right now, but we
-         can prevent the modules that don't have problems
-         from getting any worse -->
-    <!-- analyzers-common: problems -->
-    <check-missing-javadocs dir="build/docs/analyzers-icu" level="method"/>
-    <!-- analyzers-kuromoji: problems -->
-    <check-missing-javadocs dir="build/docs/analyzers-morfologik" level="method"/>
-    <check-missing-javadocs dir="build/docs/analyzers-phonetic" level="method"/>
-    <!-- analyzers-smartcn: problems -->
-    <check-missing-javadocs dir="build/docs/analyzers-stempel" level="method"/>
-    <!-- analyzers-uima: problems -->
-    <!-- benchmark: problems -->
-    <check-missing-javadocs dir="build/docs/classification" level="method"/>
-    <!-- codecs: problems -->
-    <!-- core: problems -->
-    <check-missing-javadocs dir="build/docs/demo" level="method"/>
-    <check-missing-javadocs dir="build/docs/expressions" level="method"/>
-    <check-missing-javadocs dir="build/docs/facet" level="method"/>
-    <!-- grouping: problems -->
-    <!-- highlighter: problems -->
-    <check-missing-javadocs dir="build/docs/join" level="method"/>
-    <check-missing-javadocs dir="build/docs/memory" level="method"/>
-    <!-- misc: problems -->
-    <!-- queries: problems -->
-    <!-- queryparser: problems -->
-    <!-- sandbox: problems -->
-    <check-missing-javadocs dir="build/docs/spatial" level="method"/>
-    <!-- spatial-extras: problems -->
-    <check-missing-javadocs dir="build/docs/suggest" level="method"/>
-    <!-- test-framework: problems -->
+<!--  <target name="-documentation-lint" depends="documentation">-->
+<!--    <echo message="checking for broken html..."/>-->
+<!--    <jtidy-macro>-->
+<!--       &lt;!&ndash; NOTE: must currently exclude deprecated-list due to a javadocs bug (as of 1.7.0_09)-->
+<!--            javadocs generates invalid XML if you deprecate a method that takes a parameter-->
+<!--            with a generic type &ndash;&gt;-->
+<!--      <fileset dir="build/docs" includes="**/*.html" excludes="**/deprecated-list.html"/>-->
+<!--    </jtidy-macro>-->
+<!--    <echo message="Checking for broken links..."/>-->
+<!--    <check-broken-links dir="build/docs"/>-->
+<!--    <echo message="Checking for missing docs..."/>-->
+<!--    &lt;!&ndash; TODO: change this level=method &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs" level="class"/>-->
+<!--    &lt;!&ndash; too many classes to fix overall to just enable-->
+<!--         the above to be level="method" right now, but we-->
+<!--         can prevent the modules that don't have problems-->
+<!--         from getting any worse &ndash;&gt;-->
+<!--    &lt;!&ndash; analyzers-common: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/analyzers-icu" level="method"/>-->
+<!--    &lt;!&ndash; analyzers-kuromoji: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/analyzers-morfologik" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/analyzers-phonetic" level="method"/>-->
+<!--    &lt;!&ndash; analyzers-smartcn: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/analyzers-stempel" level="method"/>-->
+<!--    &lt;!&ndash; analyzers-uima: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; benchmark: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/classification" level="method"/>-->
+<!--    &lt;!&ndash; codecs: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; core: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/demo" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/expressions" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/facet" level="method"/>-->
+<!--    &lt;!&ndash; grouping: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; highlighter: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/join" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/memory" level="method"/>-->
+<!--    &lt;!&ndash; misc: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; queries: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; queryparser: problems &ndash;&gt;-->
+<!--    &lt;!&ndash; sandbox: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/spatial" level="method"/>-->
+<!--    &lt;!&ndash; spatial-extras: problems &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/suggest" level="method"/>-->
+<!--    &lt;!&ndash; test-framework: problems &ndash;&gt;-->
 
-    <!-- too much to fix core/ for now, but enforce full javadocs for key packages -->
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/util/automaton" level="method"/>
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/analysis" level="method"/>
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/document" level="method"/>
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/search/similarities" level="method"/>
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/index" level="method"/>
-    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/codecs" level="method"/>
+<!--    &lt;!&ndash; too much to fix core/ for now, but enforce full javadocs for key packages &ndash;&gt;-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/util/automaton" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/analysis" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/document" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/search/similarities" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/index" level="method"/>-->
+<!--    <check-missing-javadocs dir="build/docs/core/org/apache/lucene/codecs" level="method"/>-->
 
-    <check-missing-javadocs dir="build/docs/spatial3d" level="method"/>
-  </target>
+<!--    <check-missing-javadocs dir="build/docs/spatial3d" level="method"/>-->
+<!--  </target>-->
   
-  <target name="-ecj-javadoc-lint" depends="compile,compile-test,-ecj-javadoc-lint-unsupported,-ecj-resolve" if="ecj-javadoc-lint.supported">
-    <subant target="-ecj-javadoc-lint" failonerror="true" inheritall="false">
-      <propertyset refid="uptodate.and.compiled.properties"/>
-      <fileset dir="core" includes="build.xml"/>
-      <fileset dir="test-framework" includes="build.xml"/>
-    </subant>
-    <modules-crawl target="-ecj-javadoc-lint"/>
-  </target>
+<!--  <target name="-ecj-javadoc-lint" depends="compile,compile-test,-ecj-resolve" if="ecj-javadoc-lint.supported">-->
+<!--    <subant target="-ecj-javadoc-lint" failonerror="true" inheritall="false">-->
+<!--      <propertyset refid="uptodate.and.compiled.properties"/>-->
+<!--      <fileset dir="core" includes="build.xml"/>-->
+<!--      <fileset dir="test-framework" includes="build.xml"/>-->
+<!--    </subant>-->
+<!--    <modules-crawl target="-ecj-javadoc-lint"/>-->
+<!--  </target>-->
 
   <target name="process-webpages" depends="resolve-markdown">
     <makeurl property="process-webpages.buildfiles" separator="|">
@@ -247,9 +247,9 @@
     </copy>
   </target>
   
-  <target name="javadocs-modules" description="Generate javadoc for modules classes">
-    <modules-crawl target="javadocs"/>
-  </target>
+<!--  <target name="javadocs-modules" description="Generate javadoc for modules classes">-->
+<!--    <modules-crawl target="javadocs"/>-->
+<!--  </target>-->
 
   <!-- rat-sources-typedef is *not* a useless dependency. do not remove -->
   <target name="rat-sources" depends="rat-sources-typedef,common.rat-sources">
@@ -267,7 +267,7 @@
   <!-- ================================================================== -->
   <!--                                                                    -->
   <!-- ================================================================== -->
-  <target name="package" depends="jar-core, jar-test-framework, build-modules, init-dist, documentation"/>
+  <target name="package" depends="jar-core, jar-test-framework, build-modules, init-dist"/>
 
   <target name="nightly" depends="test, package-tgz">
   </target>
